@@ -1,0 +1,86 @@
+.Header {
+  display: flex;
+  height: 75px;
+  /* border: 1px solid red; */
+}
+
+.Header-Container {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin-left: 1rem;
+  /* border: 1px solid green; */
+}
+
+.Header-Logo {
+  display: grid;
+  cursor: pointer;
+  height: 50px;
+  align-items: center;
+  color: #0e89fc;
+  font-size: 24px;
+  font-weight: 500;
+  /* border: 1px solid blue; */
+}
+
+.page-wrapper {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.container.feature-top.pb-0 {
+  padding-bottom: 0;
+}
+
+.form-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.form-label {
+  color: #a3a9b6;
+  display: block;
+  text-align: left;
+}
+
+.form-input {
+  border-radius: 4px;
+  border: 1px solid #c4cad6;
+  height: 32px;
+  letter-spacing: -0.01em;
+  padding-left: 6px;
+  width: 100%;
+}
+
+.form-show-password {
+  position: absolute;
+  top: 35px;
+  right: 12px;
+}
+
+.form-button {
+  background: #3492fb;
+  border-radius: 4px;
+  border: none;
+  color: #ffffff;
+  display: block;
+  font-family: DM Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+  height: 40px;
+  line-height: 23px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
