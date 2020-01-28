@@ -6,7 +6,8 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      error: ""
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -30,10 +31,14 @@ class SignUp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     const data = {
       username: this.state.username,
       password: this.state.password
     };
+
+    document.querySelector(".form-wrapper").classList.add("requesting");
+
     fetch("http://localhost:4000/signup", {
       method: "POST",
       body: JSON.stringify(data),
@@ -43,11 +48,29 @@ class SignUp extends React.Component {
       credentials: "include"
     })
       .then(response => {
-        return response.json();
+        if (response.ok) {
+          document
+            .querySelector(".form-wrapper")
+            .classList.remove("requesting");
+          return response.json();
+        } else {
+          return response.json().then(body => {
+            document
+              .querySelector(".form-wrapper")
+              .classList.remove("requesting");
+            throw new Error(body.error);
+          });
+        }
       })
-      .then(data => console.log("We got something back"))
+      .then(data => {
+        console.log(data);
+        this.props.history.push("/");
+      })
       .catch(error => {
-        console.log("An error has occurred");
+        document.querySelector(".errorMessage").classList.add("active");
+        this.setState({
+          error: error.message
+        });
       });
   }
 
@@ -62,6 +85,7 @@ class SignUp extends React.Component {
         <div className="page-wrapper">
           <div className="container feature-top pb-0">
             <div className="form-wrapper">
+              <div className="loading">loading ...</div>
               <h1>Sign up</h1>
               <form className="form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
@@ -92,7 +116,7 @@ class SignUp extends React.Component {
                     onChange={this.handlePasswordChange}
                   />
                 </div>
-
+                <div className="errorMessage">{this.state.error}</div>
                 <button type="submit" className="form-button">
                   Sign up
                 </button>

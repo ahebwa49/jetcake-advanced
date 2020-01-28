@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./common.css";
 
 class SignIn extends React.Component {
@@ -6,7 +7,8 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      error: ""
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -31,11 +33,15 @@ class SignIn extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     const data = {
       username: this.state.username,
       password: this.state.password
     };
-    fetch("http://localhost:4000/login", {
+
+    document.querySelector(".form-wrapper").classList.add("requesting");
+
+    fetch("http://localhost:4000/signin", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -44,11 +50,29 @@ class SignIn extends React.Component {
       credentials: "include"
     })
       .then(response => {
-        return response.json();
+        if (response.ok) {
+          document
+            .querySelector(".form-wrapper")
+            .classList.remove("requesting");
+          return response.json();
+        } else {
+          return response.json().then(body => {
+            document
+              .querySelector(".form-wrapper")
+              .classList.remove("requesting");
+            throw new Error(body.error);
+          });
+        }
       })
-      .then(data => console.log("We got something back"))
+      .then(data => {
+        console.log(data);
+        this.props.history.push("/");
+      })
       .catch(error => {
-        console.log("An error has occurred");
+        document.querySelector(".errorMessage").classList.add("active");
+        this.setState({
+          error: error.message
+        });
       });
   }
 
@@ -63,6 +87,7 @@ class SignIn extends React.Component {
         <div className="page-wrapper">
           <div className="container feature-top pb-0">
             <div className="form-wrapper">
+              <div className="loading">loading ...</div>
               <h1>Sign in</h1>
               <form className="form" onSubmit={this.handleSubmit} method="post">
                 <div className="form-group">
@@ -95,11 +120,12 @@ class SignIn extends React.Component {
                     className="form-input"
                   />
                 </div>
+                <div className="errorMessage">{this.state.error}</div>
                 <button type="submit" className="form-button">
                   Sign in
                 </button>
                 <div className="form-forgot-password">
-                  Don't have an account?<a href="/signup">Create one</a>
+                  Don't have an account?<Link to="/signup">Create one</Link>
                 </div>
               </form>
             </div>
