@@ -1,6 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
+import { addUser } from "../actions/addUser";
 import "./common.css";
+
+const mapDispatchToProps = dispatch => ({
+  addNewUser: user => {
+    dispatch(addUser(user));
+  }
+});
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -64,8 +73,9 @@ class SignIn extends React.Component {
           });
         }
       })
-      .then(data => {
+      .then(async data => {
         console.log(data);
+        await this.props.addNewUser(data);
         this.props.history.push("/");
       })
       .catch(error => {
@@ -135,4 +145,7 @@ class SignIn extends React.Component {
     );
   }
 }
-export default SignIn;
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);

@@ -1,16 +1,47 @@
 import React from "react";
-import "./common.css";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+
+import { addUser } from "../actions/addUser";
+
+const mapStateToProps = state => {
+  console.log(state.user);
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addNewUser: user => {
+    dispatch(addUser(user));
+  }
+});
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogoClick = () => {
     window.location.assign("/");
   };
+
+  handleLogout() {
+    fetch("http://localhost:4000/logout", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(async data => {
+        console.log(data);
+        await this.props.addNewUser(data);
+        this.props.history.push("/signin");
+      });
+  }
 
   render() {
     return (
@@ -28,11 +59,31 @@ class Header extends React.Component {
             cursor: "pointer"
           }}
         >
-          <Link to="/signin">Sign In</Link>
+          {this.props.user.username ? (
+            <>
+              <p><span><Link to={{
+                pathname: `profile/${this.props.user._id}`
+              }}>profile</Link></span>{" "}
+                {this.props.user.username}{" "}
+                <span
+                  style={{ color: "red", textDecoration: "underline" }}
+                  onClick={this.handleLogout}
+                >
+                  logout
+                </span>
+              </p>
+            </>
+          ) : (
+            <Link to="/signin">Sign In</Link>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default Header;
+export default withRouter( 
+  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header));
