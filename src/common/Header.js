@@ -24,6 +24,22 @@ class Header extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  componentWillMount() {
+    fetch("http://localhost:4000/profile", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(async data => {
+        await this.props.addNewUser(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleLogoClick = () => {
     window.location.assign("/");
   };
@@ -61,9 +77,10 @@ class Header extends React.Component {
         >
           {this.props.user.username ? (
             <>
-              <p><span><Link to={{
-                pathname: `profile/${this.props.user._id}`
-              }}>profile</Link></span>{" "}
+              <p>
+                <span>
+                  <Link to="/profile">profile</Link>
+                </span>{" "}
                 {this.props.user.username}{" "}
                 <span
                   style={{ color: "red", textDecoration: "underline" }}
@@ -82,8 +99,9 @@ class Header extends React.Component {
   }
 }
 
-export default withRouter( 
+export default withRouter(
   connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header));
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

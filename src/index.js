@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
 import "./index.css";
 import App from "./App";
 import Header from "./common/Header";
 import SignIn from "./common/SignIn";
 import SignUp from "./common/SignUp";
+import Profile from "./common/Profile";
 import * as serviceWorker from "./serviceWorker";
 
 const Routing = () => {
@@ -19,6 +21,7 @@ const Routing = () => {
         <Route exact path="/" component={App} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </Router>
   );
