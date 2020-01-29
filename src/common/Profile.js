@@ -42,7 +42,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.phoneNumber}
                   className="form-input"
                 />
               </div>
@@ -54,7 +54,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.address}
                   className="form-input"
                 />
               </div>
@@ -66,7 +66,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.dateOfBirth}
                   className="form-input"
                 />
               </div>
@@ -82,7 +82,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.nickname}
                   className="form-input"
                 />
                 <br />
@@ -93,7 +93,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.book}
                   className="form-input"
                 />
                 <br />
@@ -104,7 +104,7 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.state.password}
+                  value={this.props.user.spouse}
                   className="form-input"
                 />
               </div>
