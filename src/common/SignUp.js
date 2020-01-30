@@ -18,6 +18,7 @@ class SignUp extends React.Component {
       password: "",
       phoneNumber: "",
       address: "",
+      profile: null,
       dateOfBirth: "",
       nickname: "",
       book: "",
@@ -86,6 +87,12 @@ class SignUp extends React.Component {
     });
   }
 
+  handleProfileChange = e => {
+    this.setState({
+      profile: e.target.files[0]
+    });
+  };
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -94,6 +101,7 @@ class SignUp extends React.Component {
       password: this.state.password,
       phoneNumber: this.state.phoneNumber,
       address: this.state.address,
+      profile: this.state.profile,
       dateOfBirth: this.state.dateOfBirth,
       nickname: this.state.nickname,
       book: this.state.book,
@@ -227,6 +235,19 @@ class SignUp extends React.Component {
                     onChange={this.handleDateOfBirthChange}
                   />
                 </div>
+                <div className="form-group">
+                  <label htmlFor="password" className="form-label">
+                    Profile picture
+                  </label>
+                  <br />
+                  <input
+                    type="file"
+                    id="profile"
+                    name="profile"
+                    onChange={this.handleProfileChange}
+                  />
+                </div>
+                <br />
                 <div className="form-group">
                   <label htmlFor="security questions" className="form-label">
                     Security questions
