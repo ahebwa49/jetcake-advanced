@@ -88,35 +88,30 @@ class SignUp extends React.Component {
   }
 
   handleProfileChange = e => {
-    this.setState({
-      profile: e.target.files[0]
-    });
+    console.log(e.target.files[0]);
+    this.setState({ profile: e.target.files[0] });
   };
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const data = {
-      username: this.state.username,
-      password: this.state.password,
-      phoneNumber: this.state.phoneNumber,
-      address: this.state.address,
-      profile: this.state.profile,
-      dateOfBirth: this.state.dateOfBirth,
-      nickname: this.state.nickname,
-      book: this.state.book,
-      spouse: this.state.spouse
-    };
-
-    console.log(data.dateOfBirth);
     document.querySelector(".form-wrapper").classList.add("requesting");
+
+    let formData = new FormData();
+
+    formData.append("avatar", this.state.profile);
+    formData.append("username", this.state.username);
+    formData.append("password", this.state.password);
+    formData.append("phoneNumber", this.state.phoneNumber);
+    formData.append("address", this.state.address);
+    formData.append("dateOfBirth", this.state.dateOfBirth);
+    formData.append("nickname", this.state.nickname);
+    formData.append("book", this.state.book);
+    formData.append("spouse", this.state.spouse);
 
     fetch("http://localhost:4000/signup", {
       method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      },
+      body: formData,
       credentials: "include"
     })
       .then(response => {
@@ -160,7 +155,25 @@ class SignUp extends React.Component {
             <div className="form-wrapper">
               <div className="loading">loading ...</div>
               <h1>Sign up</h1>
-              <form className="form" onSubmit={this.handleSubmit}>
+              <form
+                className="form"
+                onSubmit={this.handleSubmit}
+                encType="multipart/form-data"
+              >
+                <div className="form-group">
+                  <label htmlFor="password" className="form-label">
+                    Profile picture
+                  </label>
+                  <br />
+                  <input
+                    type="file"
+                    id="profile"
+                    name="profile"
+                    onChange={this.handleProfileChange}
+                    // value={this.state.profile}
+                    required
+                  />
+                </div>
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">
                     Your Email
@@ -235,18 +248,7 @@ class SignUp extends React.Component {
                     onChange={this.handleDateOfBirthChange}
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="password" className="form-label">
-                    Profile picture
-                  </label>
-                  <br />
-                  <input
-                    type="file"
-                    id="profile"
-                    name="profile"
-                    onChange={this.handleProfileChange}
-                  />
-                </div>
+
                 <br />
                 <div className="form-group">
                   <label htmlFor="security questions" className="form-label">

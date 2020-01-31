@@ -1,17 +1,79 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-
-class Profile extends React.Component {
+class EditProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      profile: "",
+      phoneNumber: "",
+      address: "",
+      nickname: "",
+      dateOfBirth: "",
+      book: "",
+      spouse: ""
+    };
+  }
+
+  handleProfileChange = e => {
+    this.setState({
+      profile: e.target.files[0]
+    });
+  };
+
+  handlePhoneNumberChange = e => {
+    this.setState({
+      phoneNumber: e.target.value
+    });
+  };
+
+  handleAddressChange = e => {
+    this.setState({
+      address: e.target.value
+    });
+  };
+
+  handleNicknameChange = e => {
+    this.setState({
+      nickname: e.target.value
+    });
+  };
+
+  handleDateOfBirthChange = e => {
+    this.setState({
+      dateOfBirth: e.target.value
+    });
+  };
+
+  handleBookChange = e => {
+    this.setState({
+      book: e.target.value
+    });
+  };
+
+  handleSpouseChange = e => {
+    this.setState({
+      spouse: e.target.value
+    });
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:4000/profile", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          profile: data.profile,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          nickname: data.nickname,
+          dateOfBirth: data.dateOfBirth,
+          book: data.book,
+          spouse: data.spouse
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -20,30 +82,17 @@ class Profile extends React.Component {
         <div className="container feature-top pb-0">
           <div className="form-wrapper">
             <div className="loading">loading ...</div>
-            <h1>Profile</h1>
+            <h1>Edit your Profile</h1>
             <form className="form" onSubmit={this.handleSubmit} method="post">
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
                   Profile Photo
                 </label>
-
                 <img
                   width="100"
                   height="100"
-                  src={this.props.user.profile}
+                  src={this.state.profile}
                   alt="profile"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">
-                  Your Email
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={this.props.user.username}
-                  className="form-input"
                 />
               </div>
               <div className="form-group">
@@ -54,7 +103,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.phoneNumber}
+                  value={this.state.phoneNumber}
+                  onChange={this.handlePhoneNumberChange}
                   className="form-input"
                 />
               </div>
@@ -66,7 +116,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.address}
+                  value={this.state.address}
+                  onChange={this.handleAddressChange}
                   className="form-input"
                 />
               </div>
@@ -78,7 +129,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.dateOfBirth}
+                  value={this.state.dateOfBirth}
+                  onChange={this.handleDateOfBirthChange}
                   className="form-input"
                 />
               </div>
@@ -94,7 +146,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.nickname}
+                  value={this.state.nickname}
+                  onChange={this.handleNicknameChange}
                   className="form-input"
                 />
                 <br />
@@ -105,7 +158,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.book}
+                  value={this.state.book}
+                  onChange={this.handleBookChange}
                   className="form-input"
                 />
                 <br />
@@ -116,7 +170,8 @@ class Profile extends React.Component {
                   type="text"
                   id="password"
                   name="password"
-                  value={this.props.user.spouse}
+                  value={this.state.spouse}
+                  onChange={this.handleSpouseChange}
                   className="form-input"
                 />
               </div>
@@ -132,7 +187,4 @@ class Profile extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(Profile);
+export default EditProfile;

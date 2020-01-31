@@ -10,6 +10,7 @@ import Header from "./common/Header";
 import SignIn from "./common/SignIn";
 import SignUp from "./common/SignUp";
 import Profile from "./common/Profile";
+import EditProfile from "./common/EditProfile";
 import * as serviceWorker from "./serviceWorker";
 
 const Routing = () => {
@@ -21,7 +22,8 @@ const Routing = () => {
         <Route exact path="/" component={App} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={Profile} />
+        <Route exact path="/profile" component={Profile} />
+        <Route path="/profile/edit" component={EditProfile} />
       </Switch>
     </Router>
   );
