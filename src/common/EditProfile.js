@@ -10,8 +10,32 @@ class EditProfile extends React.Component {
       nickname: "",
       dateOfBirth: "",
       book: "",
-      spouse: ""
+      spouse: "",
+      error: "",
+      _id: ""
     };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:4000/profile", {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          profile: data.profile,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          nickname: data.nickname,
+          dateOfBirth: data.dateOfBirth,
+          book: data.book,
+          spouse: data.spouse,
+          _id: data._id
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   handleProfileChange = e => {
@@ -56,25 +80,62 @@ class EditProfile extends React.Component {
     });
   };
 
-  componentDidMount() {
-    fetch("http://localhost:4000/profile", {
-      method: "GET",
+  handleRemovePhoto = () => {
+    this.setState({
+      profile: ""
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { _id } = this.state;
+
+    document.querySelector(".form-wrapper").classList.add("requesting");
+
+    let formData = new FormData();
+
+    console.log(this.state.profile);
+
+    formData.append("avatar", this.state.profile);
+    formData.append("phoneNumber", this.state.phoneNumber);
+    formData.append("address", this.state.address);
+    formData.append("dateOfBirth", this.state.dateOfBirth);
+    formData.append("nickname", this.state.nickname);
+    formData.append("book", this.state.book);
+    formData.append("spouse", this.state.spouse);
+
+    fetch(`http://localhost:4000/profile/edit/${_id}`, {
+      method: "PUT",
+      body: formData,
       credentials: "include"
     })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          profile: data.profile,
-          phoneNumber: data.phoneNumber,
-          address: data.address,
-          nickname: data.nickname,
-          dateOfBirth: data.dateOfBirth,
-          book: data.book,
-          spouse: data.spouse
-        });
+      .then(response => {
+        if (response.ok) {
+          document
+            .querySelector(".form-wrapper")
+            .classList.remove("requesting");
+          return response.json();
+        } else {
+          return response.json().then(body => {
+            document
+              .querySelector(".form-wrapper")
+              .classList.remove("requesting");
+            throw new Error(body.error);
+          });
+        }
       })
-      .catch(error => console.log(error));
-  }
+      .then(data => {
+        console.log(data);
+        document.querySelector(".successMessage").classList.add("active");
+      })
+      .catch(error => {
+        document.querySelector(".errorMessage").classList.add("active");
+        this.setState({
+          error: error.message
+        });
+      });
+  };
 
   render() {
     return (
@@ -88,12 +149,28 @@ class EditProfile extends React.Component {
                 <label htmlFor="email" className="form-label">
                   Profile Photo
                 </label>
-                <img
-                  width="100"
-                  height="100"
-                  src={this.state.profile}
-                  alt="profile"
-                />
+                {this.state.profile.length ? (
+                  <>
+                    <img
+                      width="100"
+                      height="100"
+                      src={this.state.profile}
+                      alt="profile"
+                    />
+                    <br />
+                    <button type="button" onClick={this.handleRemovePhoto}>
+                      change photo
+                    </button>
+                  </>
+                ) : (
+                  <input
+                    type="file"
+                    onChange={this.handleProfileChange}
+                    id="profile"
+                    name="profile"
+                    required
+                  />
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="phone number" className="form-label">
@@ -101,8 +178,8 @@ class EditProfile extends React.Component {
                 </label>
                 <input
                   type="text"
-                  id="password"
-                  name="password"
+                  id="phone number"
+                  name="phone number"
                   value={this.state.phoneNumber}
                   onChange={this.handlePhoneNumberChange}
                   className="form-input"
@@ -114,8 +191,8 @@ class EditProfile extends React.Component {
                 </label>
                 <input
                   type="text"
-                  id="password"
-                  name="password"
+                  id="address"
+                  name="address"
                   value={this.state.address}
                   onChange={this.handleAddressChange}
                   className="form-input"
@@ -126,9 +203,9 @@ class EditProfile extends React.Component {
                   Date of birth
                 </label>
                 <input
-                  type="text"
-                  id="password"
-                  name="password"
+                  type="date"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
                   value={this.state.dateOfBirth}
                   onChange={this.handleDateOfBirthChange}
                   className="form-input"
@@ -144,8 +221,8 @@ class EditProfile extends React.Component {
                 </label>
                 <input
                   type="text"
-                  id="password"
-                  name="password"
+                  id="nickname"
+                  name="nickname"
                   value={this.state.nickname}
                   onChange={this.handleNicknameChange}
                   className="form-input"
@@ -156,8 +233,8 @@ class EditProfile extends React.Component {
                 </label>
                 <input
                   type="text"
-                  id="password"
-                  name="password"
+                  id="book"
+                  name="book"
                   value={this.state.book}
                   onChange={this.handleBookChange}
                   className="form-input"
@@ -168,16 +245,19 @@ class EditProfile extends React.Component {
                 </label>
                 <input
                   type="text"
-                  id="password"
-                  name="password"
+                  id="spouse"
+                  name="spouse"
                   value={this.state.spouse}
                   onChange={this.handleSpouseChange}
                   className="form-input"
                 />
               </div>
               <div className="errorMessage">{this.state.error}</div>
+              <div className="successMessage">
+                Your profile update was successful!
+              </div>
               <button type="submit" className="form-button">
-                Edit
+                Save
               </button>
             </form>
           </div>

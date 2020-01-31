@@ -121,9 +121,12 @@ class Profile extends React.Component {
                 />
               </div>
               <div className="errorMessage">{this.state.error}</div>
-              <button type="submit" className="form-button">
-                Edit
-              </button>
+
+              <Link to="/profile/edit" style={{ textDecoration: "none" }}>
+                <button type="submit" className="form-button">
+                  Edit
+                </button>
+              </Link>
             </form>
           </div>
         </div>

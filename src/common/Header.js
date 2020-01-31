@@ -41,7 +41,7 @@ class Header extends React.Component {
   }
 
   handleLogoClick = () => {
-    window.location.assign("/");
+    this.props.history.push("/");
   };
 
   handleLogout() {

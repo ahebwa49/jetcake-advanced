@@ -1,7 +1,6 @@
 const ADD = "ADD";
 const defaultState = {
-  username: "",
-  role_id: ""
+  username: ""
 };
 export const userReducer = (state = defaultState, action) => {
   switch (action.type) {

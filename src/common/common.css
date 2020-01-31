@@ -67,6 +67,15 @@
   color: red;
 }
 
+.successMessage {
+  display: none;
+}
+
+.successMessage.active {
+  display: block;
+  color: green;
+}
+
 .form {
   width: 100%;
 }
