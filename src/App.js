@@ -1,4 +1,5 @@
 import React from "react";
+import Hero from "./common/Hero";
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 style={{ textAlign: "center" }}>Hello</h1>
+        <Hero />
       </div>
     );
   }
