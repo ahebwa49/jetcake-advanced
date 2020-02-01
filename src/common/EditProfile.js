@@ -117,24 +117,11 @@ class EditProfile extends React.Component {
             .querySelector(".form-wrapper")
             .classList.remove("requesting");
           document.querySelector(".form-wrapper").classList.remove("inactive");
-          return response.json();
-        } else {
-          return response.json().then(body => {
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("requesting");
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("inactive");
-            throw new Error(body.error);
-          });
+          document.querySelector(".successMessage").classList.add("active");
         }
       })
-      .then(data => {
-        console.log(data);
-        document.querySelector(".successMessage").classList.add("active");
-      })
       .catch(error => {
+        console.log(error);
         document.querySelector(".errorMessage").classList.add("active");
         this.setState({
           error: error.message

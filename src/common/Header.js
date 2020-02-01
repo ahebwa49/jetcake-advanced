@@ -33,6 +33,7 @@ class Header extends React.Component {
         return response.json();
       })
       .then(async data => {
+        console.log(data);
         await this.props.addNewUser(data);
       })
       .catch(error => {

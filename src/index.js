@@ -11,6 +11,7 @@ import SignIn from "./common/SignIn";
 import SignUp from "./common/SignUp";
 import Profile from "./common/Profile";
 import EditProfile from "./common/EditProfile";
+import Footer from "./common/Footer";
 import * as serviceWorker from "./serviceWorker";
 
 const Routing = () => {
@@ -25,6 +26,7 @@ const Routing = () => {
         <Route exact path="/profile" component={Profile} />
         <Route path="/profile/edit" component={EditProfile} />
       </Switch>
+      <Footer />
     </Router>
   );
 };
