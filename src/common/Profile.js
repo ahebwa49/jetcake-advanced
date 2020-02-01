@@ -38,49 +38,33 @@ class Profile extends React.Component {
                 <label htmlFor="email" className="form-label">
                   Your Email
                 </label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={this.props.user.username}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.username}
+                </label>
               </div>
               <div className="form-group">
                 <label htmlFor="phone number" className="form-label">
                   Phone number
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.phoneNumber}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.phoneNumber}
+                </label>
               </div>
               <div className="form-group">
                 <label htmlFor="address" className="form-label">
                   Address
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.address}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.address}
+                </label>
               </div>
               <div className="form-group">
                 <label htmlFor="date of birth" className="form-label">
                   Date of birth
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.dateOfBirth}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.dateOfBirth}
+                </label>
               </div>
               <div className="form-group">
                 <label htmlFor="security questions" className="form-label">
@@ -90,35 +74,23 @@ class Profile extends React.Component {
                 <label htmlFor="security questions" className="form-label">
                   What is your childhood nickname?
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.nickname}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.nickname}
+                </label>
                 <br />
                 <label htmlFor="security questions" className="form-label">
                   What is your favourite book?
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.book}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.book}
+                </label>
                 <br />
                 <label htmlFor="security questions" className="form-label">
                   Where did you meet your spouse?
                 </label>
-                <input
-                  type="text"
-                  id="password"
-                  name="password"
-                  value={this.props.user.spouse}
-                  className="form-input"
-                />
+                <label className="form-label input">
+                  {this.props.user.spouse}
+                </label>
               </div>
               <div className="errorMessage">{this.state.error}</div>
 

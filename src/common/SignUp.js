@@ -96,6 +96,7 @@ class SignUp extends React.Component {
     e.preventDefault();
 
     document.querySelector(".form-wrapper").classList.add("requesting");
+    document.querySelector(".form-wrapper").classList.add("inactive");
 
     let formData = new FormData();
 
@@ -119,12 +120,16 @@ class SignUp extends React.Component {
           document
             .querySelector(".form-wrapper")
             .classList.remove("requesting");
+          document.querySelector(".form-wrapper").classList.remove("inactive");
           return response.json();
         } else {
           return response.json().then(body => {
             document
               .querySelector(".form-wrapper")
               .classList.remove("requesting");
+            document
+              .querySelector(".form-wrapper")
+              .classList.remove("inactive");
             throw new Error(body.error);
           });
         }
