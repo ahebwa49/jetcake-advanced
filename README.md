@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Before anything else
 
-You should navigate to  for the backend application. Instructions on how to run it are in the readme file.
+You should first clone the [backend application](https://github.com/ahebwa49/jetcake_api). Instructions on how to run it are in the readme file.
 
 ## Available Scripts
 
@@ -17,7 +17,7 @@ Will install all the dependecies
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You should be able to login and logout and edit your profile.
+With the backend running on localhost port 4000, you should be able to login, logout and edit your profile.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
