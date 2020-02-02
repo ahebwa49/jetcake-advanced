@@ -2,11 +2,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Before anything else
 
-You should first clone the [backend application](https://github.com/ahebwa49/jetcake_api). Instructions on how to run it are in the readme file.
+You need to first setup the [backend application](https://github.com/ahebwa49/jetcake_api). Instructions on how to run it are in the application's readme file.
 
 ## Available Scripts
 
-After cloning the app from github, In the project directory, you can run:
+After cloning this frontend app from github, In the project directory, you can run:
 
 ### `yarn install`
 
