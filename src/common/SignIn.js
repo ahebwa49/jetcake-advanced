@@ -19,28 +19,25 @@ class SignIn extends React.Component {
       password: "",
       error: ""
     };
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleUsernameChange(e) {
+  handleUsernameChange = e => {
     this.setState({
       username: e.target.value
     });
-  }
+  };
 
-  handlePasswordChange(e) {
+  handlePasswordChange = e => {
     this.setState({
       password: e.target.value
     });
-  }
+  };
 
   handleLogoClick = () => {
     window.location.assign("/");
   };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
 
     const data = {
@@ -79,7 +76,6 @@ class SignIn extends React.Component {
         }
       })
       .then(async data => {
-        console.log(data);
         await this.props.addNewUser(data);
         this.props.history.push("/");
       })
@@ -89,7 +85,7 @@ class SignIn extends React.Component {
           error: error.message
         });
       });
-  }
+  };
 
   render() {
     return (

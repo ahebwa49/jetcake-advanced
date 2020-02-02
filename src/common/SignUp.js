@@ -25,74 +25,64 @@ class SignUp extends React.Component {
       spouse: "",
       error: ""
     };
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
-    this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
-    this.handleNicknameChange = this.handleNicknameChange.bind(this);
-    this.handleBookChange = this.handleBookChange.bind(this);
-    this.handleSpouseChange = this.handleSpouseChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleLogoClick = () => {
     window.location.assign("/");
   };
 
-  handleUsernameChange(e) {
+  handleUsernameChange = e => {
     this.setState({
       username: e.target.value
     });
-  }
+  };
 
-  handlePasswordChange(e) {
+  handlePasswordChange = e => {
     this.setState({
       password: e.target.value
     });
-  }
+  };
 
-  handlePhoneNumberChange(e) {
+  handlePhoneNumberChange = e => {
     this.setState({
       phoneNumber: e.target.value
     });
-  }
+  };
 
-  handleAddressChange(e) {
+  handleAddressChange = e => {
     this.setState({
       address: e.target.value
     });
-  }
+  };
 
-  handleNicknameChange(e) {
+  handleNicknameChange = e => {
     this.setState({
       nickname: e.target.value
     });
-  }
+  };
 
-  handleBookChange(e) {
+  handleBookChange = e => {
     this.setState({
       book: e.target.value
     });
-  }
+  };
 
-  handleSpouseChange(e) {
+  handleSpouseChange = e => {
     this.setState({
       spouse: e.target.value
     });
-  }
+  };
 
-  handleDateOfBirthChange(e) {
+  handleDateOfBirthChange = e => {
     this.setState({
       dateOfBirth: e.target.value
     });
-  }
+  };
 
   handleProfileChange = e => {
-    console.log(e.target.files[0]);
     this.setState({ profile: e.target.files[0] });
   };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
 
     document.querySelector(".form-wrapper").classList.add("requesting");
@@ -135,7 +125,6 @@ class SignUp extends React.Component {
         }
       })
       .then(async data => {
-        console.log(data);
         await this.props.addNewUser(data);
         this.props.history.push("/");
       })
@@ -145,7 +134,7 @@ class SignUp extends React.Component {
           error: error.message
         });
       });
-  }
+  };
 
   render() {
     return (

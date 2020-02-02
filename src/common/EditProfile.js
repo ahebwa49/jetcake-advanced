@@ -23,7 +23,6 @@ class EditProfile extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.setState({
           profile: data.profile,
           phoneNumber: data.phoneNumber,
@@ -95,8 +94,6 @@ class EditProfile extends React.Component {
     document.querySelector(".form-wrapper").classList.add("inactive");
 
     let formData = new FormData();
-
-    console.log(this.state.profile);
 
     formData.append("avatar", this.state.profile);
     formData.append("phoneNumber", this.state.phoneNumber);

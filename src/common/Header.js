@@ -6,7 +6,6 @@ import { addUser } from "../actions/addUser";
 import MenuButton from "./MenuButton";
 
 const mapStateToProps = state => {
-  console.log(state.user);
   return {
     user: state.user
   };
@@ -34,7 +33,6 @@ export class Header extends React.Component {
         return response.json();
       })
       .then(async data => {
-        console.log(data);
         await this.props.addNewUser(data);
       })
       .catch(error => {
@@ -55,7 +53,6 @@ export class Header extends React.Component {
         return response.json();
       })
       .then(async data => {
-        console.log(data);
         await this.props.addNewUser(data);
         this.props.history.push("/signin");
       });
