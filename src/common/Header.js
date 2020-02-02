@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 import { addUser } from "../actions/addUser";
+import MenuButton from "./MenuButton";
 
 const mapStateToProps = state => {
   console.log(state.user);
@@ -69,6 +70,7 @@ class Header extends React.Component {
           </div>
         </div>
         <div
+          className="desktopMenu"
           style={{
             marginLeft: "auto",
             alignSelf: "center",
@@ -94,6 +96,13 @@ class Header extends React.Component {
           ) : (
             <Link to="/signin">Sign In</Link>
           )}
+        </div>
+        <div
+          style={{ display: "none" }}
+          className="menuButton"
+          onClick={this.props.handleShowMobileMenu}
+        >
+          <MenuButton />
         </div>
       </div>
     );

@@ -12,24 +12,42 @@ import SignUp from "./common/SignUp";
 import Profile from "./common/Profile";
 import EditProfile from "./common/EditProfile";
 import Footer from "./common/Footer";
+import MobileMenu from "./common/MobileMenu";
 import * as serviceWorker from "./serviceWorker";
 
-const Routing = () => {
-  return (
-    <Router>
-      <Header />
+class Routing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMobileMenu: false
+    };
+  }
 
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route exact path="/profile" component={Profile} />
-        <Route path="/profile/edit" component={EditProfile} />
-      </Switch>
-      <Footer />
-    </Router>
-  );
-};
+  handleShowMobileMenu = () => {
+    const { showMobileMenu } = this.state;
+    this.setState({
+      showMobileMenu: !showMobileMenu
+    });
+  };
+  render() {
+    const { showMobileMenu } = this.state;
+    return (
+      <Router>
+        <Header handleShowMobileMenu={this.handleShowMobileMenu} />
+        {showMobileMenu && <MobileMenu />}
+
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/profile/edit" component={EditProfile} />
+        </Switch>
+        <Footer />
+      </Router>
+    );
+  }
+}
 
 ReactDOM.render(
   <Provider store={store()}>
