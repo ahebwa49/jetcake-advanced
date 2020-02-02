@@ -25,7 +25,7 @@ export class Header extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch("http://localhost:4000/profile", {
       method: "GET",
       credentials: "include"
@@ -82,11 +82,16 @@ export class Header extends React.Component {
             <>
               <p>
                 <span>
-                  <Link to="/profile">profile</Link>
+                  <Link
+                    style={{ textDecoration: "none", color: "#164C60" }}
+                    to="/profile"
+                  >
+                    profile
+                  </Link>
                 </span>{" "}
                 {this.props.user.username}{" "}
                 <span
-                  style={{ color: "red", textDecoration: "underline" }}
+                  style={{ color: "red", textDecoration: "none" }}
                   onClick={this.handleLogout}
                 >
                   logout
@@ -94,7 +99,12 @@ export class Header extends React.Component {
               </p>
             </>
           ) : (
-            <Link to="/signin">Sign In</Link>
+            <Link
+              to="/signin"
+              style={{ textDecoration: "none", color: "#164C60" }}
+            >
+              Sign In
+            </Link>
           )}
         </div>
         <div

@@ -23,18 +23,37 @@ class Routing extends React.Component {
     };
   }
 
+  // closeMenu = () => {
+  //   this.setState({
+  //     showMobileMenu: false
+  //   });
+  // };
+  handleCloseMobileMenu = () => {
+    this.setState({
+      showMobileMenu: false
+    });
+  };
   handleShowMobileMenu = () => {
     const { showMobileMenu } = this.state;
-    this.setState({
-      showMobileMenu: !showMobileMenu
-    });
+    this.setState(
+      {
+        showMobileMenu: !showMobileMenu
+      },
+      () => {
+        document
+          .querySelector(".mobileMenu")
+          .addEventListener("click", this.handleCloseMobileMenu);
+      }
+    );
   };
   render() {
     const { showMobileMenu } = this.state;
     return (
       <Router>
         <Header handleShowMobileMenu={this.handleShowMobileMenu} />
-        {showMobileMenu && <MobileMenu />}
+        {showMobileMenu && (
+          <MobileMenu handleShowMobileMenu={this.handleShowMobileMenu} />
+        )}
 
         <Switch>
           <Route exact path="/" component={App} />

@@ -40,28 +40,46 @@ class MobileMenu extends Component {
     return (
       <div className="mobileMenu">
         <div className="listItems">
-          {this.props.user.username || this.props.user.email ? (
+          {this.props.user.username ? (
             <>
-              <div>{this.props.user.username || this.props.user.email}</div>
-              <div>
-                <Link to="/profile">Profile</Link>
+              <div className="listItem">{this.props.user.username}</div>
+              <div className="listItem">
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Profile
+                </Link>
               </div>
-              <div onClick={this.handleLogout}>logout</div>
+              <div className="listItem" onClick={this.handleLogout}>
+                logout
+              </div>
             </>
           ) : (
             <>
-              <div>
-                <Link to="/signin">Sign in</Link>
+              <div className="listItem">
+                <Link
+                  to="/signin"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Sign in
+                </Link>
               </div>
-              <div>
-                {" "}
-                <Link to="/signup">Register</Link>
+              <div className="listItem">
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Register
+                </Link>
               </div>
             </>
           )}
         </div>
         <div className="close">
-          <MenuButtonClose handleSidebarHide={this.props.handleSidebarHide} />
+          <MenuButtonClose
+            handleShowMobileMenu={this.props.handleShowMobileMenu}
+          />
         </div>
       </div>
     );

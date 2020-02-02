@@ -16,7 +16,7 @@ const MenuButtonClose = props => {
       width: "100%",
       height: "5px",
       borderRadius: "3px",
-      backgroundColor: "black",
+      backgroundColor: "white",
       transform: "rotate(45deg)"
     },
 
@@ -26,12 +26,12 @@ const MenuButtonClose = props => {
       position: "relative",
       top: "-5px",
       borderRadius: "3px",
-      backgroundColor: "black",
+      backgroundColor: "white",
       transform: "rotate(-45deg)"
     }
   };
   return (
-    <div style={styles.container} onClick={props.handleSidebarHide}>
+    <div style={styles.container} onClick={props.handleShowMobileMenu}>
       <div style={styles.bar1} />
       <div style={styles.bar2} />
     </div>
