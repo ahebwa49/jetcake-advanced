@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfile component renders without crashing 1`] = `
+<div
+  className="page-wrapper"
+>
+  <div
+    className="container feature-top pb-0"
+  >
+    <div
+      className="form-wrapper"
+    >
+      <div
+        className="loading"
+      >
+        loading ...
+      </div>
+      <h1>
+        Edit your Profile
+      </h1>
+      <form
+        className="form"
+        method="post"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-group"
+        >
+          <label
+            className="form-label"
+            htmlFor="email"
+          >
+            Profile Photo
+          </label>
+          <input
+            id="profile"
+            name="profile"
+            onChange={[Function]}
+            required={true}
+            type="file"
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <label
+            className="form-label"
+            htmlFor="phone number"
+          >
+            Phone number
+          </label>
+          <input
+            className="form-input"
+            id="phone number"
+            name="phone number"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <label
+            className="form-label"
+            htmlFor="address"
+          >
+            Address
+          </label>
+          <input
+            className="form-input"
+            id="address"
+            name="address"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <label
+            className="form-label"
+            htmlFor="date of birth"
+          >
+            Date of birth
+          </label>
+          <input
+            className="form-input"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            onChange={[Function]}
+            type="date"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <label
+            className="form-label"
+            htmlFor="security questions"
+          >
+            Security questions
+          </label>
+          <br />
+          <label
+            className="form-label"
+            htmlFor="security questions"
+          >
+            What is your childhood nickname?
+          </label>
+          <input
+            className="form-input"
+            id="nickname"
+            name="nickname"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+          <br />
+          <label
+            className="form-label"
+            htmlFor="security questions"
+          >
+            What is your favourite book?
+          </label>
+          <input
+            className="form-input"
+            id="book"
+            name="book"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+          <br />
+          <label
+            className="form-label"
+            htmlFor="security questions"
+          >
+            Where did you meet your spouse?
+          </label>
+          <input
+            className="form-input"
+            id="spouse"
+            name="spouse"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="errorMessage"
+        />
+        <div
+          className="successMessage"
+        >
+          Your profile update was successful!
+        </div>
+        <button
+          className="form-button"
+          type="submit"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

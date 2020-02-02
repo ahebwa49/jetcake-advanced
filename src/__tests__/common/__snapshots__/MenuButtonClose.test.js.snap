@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuButtonClose component renders without crashing 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "color": "white",
+      "cursor": "pointer",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "35px",
+      "justifyContent": "center",
+      "width": "35px",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "black",
+        "borderRadius": "3px",
+        "height": "5px",
+        "transform": "rotate(45deg)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "black",
+        "borderRadius": "3px",
+        "height": "5px",
+        "position": "relative",
+        "top": "-5px",
+        "transform": "rotate(-45deg)",
+        "width": "100%",
+      }
+    }
+  />
+</div>
+`;

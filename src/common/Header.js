@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-class Header extends React.Component {
+export class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
