@@ -18,7 +18,7 @@ exports[`MenuButtonClose component renders without crashing 1`] = `
   <div
     style={
       Object {
-        "backgroundColor": "black",
+        "backgroundColor": "white",
         "borderRadius": "3px",
         "height": "5px",
         "transform": "rotate(45deg)",
@@ -29,7 +29,7 @@ exports[`MenuButtonClose component renders without crashing 1`] = `
   <div
     style={
       Object {
-        "backgroundColor": "black",
+        "backgroundColor": "white",
         "borderRadius": "3px",
         "height": "5px",
         "position": "relative",

@@ -1,30 +1,30 @@
 import React from "react";
-import configureStore from "redux-mock-store";
-import { shallow, mount } from "enzyme";
-import { Provider } from "react-redux";
+// import configureStore from "redux-mock-store";
+import { shallow } from "enzyme";
+// import { Provider } from "react-redux";
 import toJson from "enzyme-to-json";
 
-import { Header } from "../../common/Header";
+import Header from "../../common/Header";
 
-const mockStore = configureStore([]);
+// const mockStore = configureStore([]);
 
 let component;
-let wrapper;
-let store;
+// let wrapper;
+// let store;
 
-beforeEach(() => {
-  store = mockStore({
-    user: { username: "ahebwa49@gmail.com" }
-  });
+// beforeEach(() => {
+//   store = mockStore({
+//     user: { username: "ahebwa49@gmail.com" }
+//   });
 
-  component = shallow(<Header />);
+//   component = shallow(<Header />);
 
-  wrapper = mount(
-    <Provider store={store}>
-      <Header />
-    </Provider>
-  );
-});
+//   wrapper = mount(
+//     <Provider store={store}>
+//       <Header />
+//     </Provider>
+//   );
+// });
 
 component = shallow(<Header />);
 
