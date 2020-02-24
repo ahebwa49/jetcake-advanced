@@ -1,12 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { addUser } from "../actions/addUser";
+import { userRegisterFetch } from "../actions/actions";
+
+const mapStateToProps = state => {
+  console.log(state.error);
+  return {
+    error: state.error,
+    user: state.user
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  addNewUser: user => {
-    dispatch(addUser(user));
+  userRegisterFetch: formData => {
+    dispatch(userRegisterFetch(formData));
   }
 });
 
@@ -82,7 +90,7 @@ class SignUp extends React.Component {
     this.setState({ profile: e.target.files[0] });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     document.querySelector(".form-wrapper").classList.add("requesting");
@@ -100,43 +108,11 @@ class SignUp extends React.Component {
     formData.append("book", this.state.book);
     formData.append("spouse", this.state.spouse);
 
-    fetch("http://localhost:4000/signup", {
-      method: "POST",
-      body: formData,
-      credentials: "include"
-    })
-      .then(response => {
-        if (response.ok) {
-          document
-            .querySelector(".form-wrapper")
-            .classList.remove("requesting");
-          document.querySelector(".form-wrapper").classList.remove("inactive");
-          return response.json();
-        } else {
-          return response.json().then(body => {
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("requesting");
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("inactive");
-            throw new Error(body.error);
-          });
-        }
-      })
-      .then(async data => {
-        await this.props.addNewUser(data);
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        document.querySelector(".errorMessage").classList.add("active");
-        this.setState({
-          error: error.message
-        });
-      });
+    this.props.userRegisterFetch(formData);
   };
 
   render() {
+    if (this.props.user.username) return <Redirect to="/" />;
     return (
       <>
         <div className="Header nb">
@@ -291,7 +267,7 @@ class SignUp extends React.Component {
                     onChange={this.handleSpouseChange}
                   />
                 </div>
-                <div className="errorMessage">{this.state.error}</div>
+                <div className="errorMessage">{this.props.error}</div>
                 <button type="submit" className="form-button">
                   Sign up
                 </button>
@@ -307,6 +283,6 @@ class SignUp extends React.Component {
   }
 }
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);

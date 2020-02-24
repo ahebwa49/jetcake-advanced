@@ -23,11 +23,6 @@ class Routing extends React.Component {
     };
   }
 
-  // closeMenu = () => {
-  //   this.setState({
-  //     showMobileMenu: false
-  //   });
-  // };
   handleCloseMobileMenu = () => {
     this.setState({
       showMobileMenu: false

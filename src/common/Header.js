@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
-import { addUser } from "../actions/addUser";
+import { logoutUser } from "../actions/actions";
 import MenuButton from "./MenuButton";
 
 const mapStateToProps = state => {
@@ -12,8 +12,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addNewUser: user => {
-    dispatch(addUser(user));
+  logoutUser: () => {
+    dispatch(logoutUser());
   }
 });
 
@@ -24,38 +24,32 @@ export class Header extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-    fetch("http://localhost:4000/profile", {
-      method: "GET",
-      credentials: "include"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(async data => {
-        await this.props.addNewUser(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:4000/profile", {
+  //     method: "GET",
+  //     credentials: "include"
+  //   })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(async data => {
+  //       await this.props.addNewUser(data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   handleLogoClick = () => {
     this.props.history.push("/");
   };
 
-  handleLogout() {
-    fetch("http://localhost:4000/logout", {
-      method: "GET",
-      credentials: "include"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(async data => {
-        await this.props.addNewUser(data);
-        this.props.history.push("/signin");
-      });
+  handleLogout(e) {
+    e.preventDefault();
+    // Remove the token from localStorage
+    localStorage.removeItem("token");
+    // Remove the user object from the Redux store
+    this.props.logoutUser();
   }
 
   render() {

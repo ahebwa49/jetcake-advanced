@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { addUser } from "../actions/addUser";
+// import { addUser } from "../actions/addUser";
 import MenuButtonClose from "./MenuButtonClose";
 
 const mapStateToProps = state => {
@@ -11,11 +11,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  addNewUser: user => {
-    dispatch(addUser(user));
-  }
-});
+// const mapDispatchToProps = dispatch => ({
+//   addNewUser: user => {
+//     dispatch(addUser(user));
+//   }
+// });
 
 class MobileMenu extends Component {
   constructor(props) {
@@ -24,17 +24,17 @@ class MobileMenu extends Component {
   }
 
   handleLogout() {
-    fetch("http://localhost:4000/logout", {
-      method: "GET",
-      credentials: "include"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(async data => {
-        await this.props.addNewUser(data);
-        this.props.history.push("/signin");
-      });
+    // fetch("http://localhost:4000/logout", {
+    //   method: "GET",
+    //   credentials: "include"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(async data => {
+    //     await this.props.addNewUser(data);
+    //     this.props.history.push("/signin");
+    //   });
   }
   render() {
     return (
@@ -88,6 +88,6 @@ class MobileMenu extends Component {
 export default withRouter(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    // mapDispatchToProps
   )(MobileMenu)
 );

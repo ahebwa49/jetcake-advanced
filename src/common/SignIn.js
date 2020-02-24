@@ -1,13 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { addUser } from "../actions/addUser";
+import { userLoginFetch } from "../actions/actions";
 import "./common.css";
 
+const mapStateToProps = state => {
+  console.log(state.error);
+  return {
+    error: state.error,
+    user: state.user
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
-  addNewUser: user => {
-    dispatch(addUser(user));
+  userLoginFetch: data => {
+    dispatch(userLoginFetch(data));
   }
 });
 
@@ -45,49 +53,16 @@ class SignIn extends React.Component {
       password: this.state.password
     };
 
+    console.log(data);
+
     document.querySelector(".form-wrapper").classList.add("requesting");
     document.querySelector(".form-wrapper").classList.add("inactive");
 
-    fetch("http://localhost:4000/signin", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include"
-    })
-      .then(response => {
-        if (response.ok) {
-          document
-            .querySelector(".form-wrapper")
-            .classList.remove("requesting");
-          document.querySelector(".form-wrapper").classList.remove("inactive");
-          return response.json();
-        } else {
-          return response.json().then(body => {
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("requesting");
-            document
-              .querySelector(".form-wrapper")
-              .classList.remove("inactive");
-            throw new Error(body.error);
-          });
-        }
-      })
-      .then(async data => {
-        await this.props.addNewUser(data);
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        document.querySelector(".errorMessage").classList.add("active");
-        this.setState({
-          error: error.message
-        });
-      });
+    this.props.userLoginFetch(data);
   };
 
   render() {
+    if (this.props.user.username) return <Redirect to="/" />;
     return (
       <>
         <div className="Header nb">
@@ -131,7 +106,7 @@ class SignIn extends React.Component {
                     className="form-input"
                   />
                 </div>
-                <div className="errorMessage">{this.state.error}</div>
+                <div className="errorMessage">{this.props.error}</div>
                 <button type="submit" className="form-button">
                   Sign in
                 </button>
@@ -147,6 +122,6 @@ class SignIn extends React.Component {
   }
 }
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignIn);
